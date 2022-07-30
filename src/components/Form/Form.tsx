@@ -52,7 +52,7 @@ const Form = () => {
   return (
     <form onSubmit={handleForm}>
       <label htmlFor='name'>Имя Фамилия:</label>
-      <input type='text' id='name' value={name.value} onChange={name.onChange} />
+      <input type='text' id='name' value={name.value} onChange={name.onChange} className='name' />
       {name.isNameError && name.isEndChanges ? <ErrorMessage message='Имя или фамилия введены некоректно.' /> : null}
       
       <label htmlFor='email'>EMAIL:</label>
