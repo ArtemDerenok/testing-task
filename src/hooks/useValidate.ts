@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const useValidate = (value, validations) => {
   const [isEmptyError, setEmptyError] = useState(false);
   const [minLengthError, setMinLengthError] = useState(false);
-  const [maxLengrhError, setMaxLengthError] = useState(false);
+  const [maxLengthError, setMaxLengthError] = useState(false);
   const [isEmailError, setEmailError] = useState(false);
   const [isPhoneNumberError, setPhoneNumberError] = useState(false);
   const [isNameError, setNameError] = useState(false);
@@ -13,6 +13,7 @@ const useValidate = (value, validations) => {
     for (const validation in validations) {
       switch(validation) {
         case 'minLength':
+          console.log(validations[validation])
           value.length < validations[validation] ? setMinLengthError(true) : setMinLengthError(false);
           break;
         case 'maxLength':
@@ -33,19 +34,21 @@ const useValidate = (value, validations) => {
           const regName = /^([a-zA-Z]{3,30})+ ([a-zA-Z]{3,30})$/;
           regName.test(value) === false ? setNameError(true) : setNameError(false);
           break;
+        default:
+          break;
       }
     }
   }, [value])
   
   useEffect(() => {
-    if (isEmptyError || isEmailError || maxLengrhError || maxLengrhError || isPhoneNumberError || isNameError) {
+    if (isEmptyError || isEmailError || minLengthError || maxLengthError || isPhoneNumberError || isNameError) {
       setInputValid(false); 
     } else {
       setInputValid(true);
     }
-  }, [isEmptyError, isEmailError, maxLengrhError, minLengthError, isPhoneNumberError, isNameError])
+  }, [isEmptyError, isEmailError, maxLengthError, minLengthError, isPhoneNumberError, isNameError])
   
-  return {isEmptyError, isEmailError, maxLengrhError, minLengthError, isPhoneNumberError, isNameError, isInputValid}
+  return {isEmptyError, isEmailError, maxLengthError, minLengthError, isPhoneNumberError, isNameError, isInputValid}
 };
 
 export default useValidate;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useValidate from "./useValidate";
 
-const useInputWithValidate = (initialValue, validations) => {
+const useInput = (initialValue, validations) => {
   const [value, setValue] = useState(initialValue);
   const [isEndChanges, setEndChanges] = useState(false);
   
@@ -12,8 +12,12 @@ const useInputWithValidate = (initialValue, validations) => {
     setEndChanges(true);
   }
   
+  const resetValue = () => {
+    setValue('');
+    setEndChanges(false);
+  }
   
-  return {value, isEndChanges, onChange, ...values}
+  return {value, isEndChanges, onChange, resetValue, ...values}
 }
 
-export default useInputWithValidate;
+export default useInput;
