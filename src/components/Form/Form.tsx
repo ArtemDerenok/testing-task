@@ -1,3 +1,4 @@
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import React, { useState, useEffect } from "react";
 import useInput from '../../hooks/useInput';
 
@@ -52,27 +53,27 @@ const Form = () => {
     <form onSubmit={handleForm}>
       <label htmlFor='name'>Имя Фамилия:</label>
       <input type='text' id='name' value={name.value} onChange={name.onChange} />
-      {name.isNameError && name.isEndChanges ? <div>Имя или фамилия введены некоректно</div> : null}
+      {name.isNameError && name.isEndChanges ? <ErrorMessage message='Имя или фамилия введены некоректно.' /> : null}
       
       <label htmlFor='email'>EMAIL:</label>
       <input type='text' id='email' onChange={email.onChange} value={email.value} />
-      {email.isEmptyError && email.isEndChanges ? <div>Поле не может быть пустым.</div> : null}
-      {email.minLengthError && email.isEndChanges ? <div>Минимум 5 символов.</div> : null}
-      {email.isEmailError && email.isEndChanges ? <div>Email введен некоректно.</div> : null}
+      {email.isEmptyError && email.isEndChanges ? <ErrorMessage message='Поле не может быть пустым.' /> : null}
+      {email.minLengthError && email.isEndChanges ? <ErrorMessage message='Минимум 5 символов.' /> : null}
+      {email.isEmailError && email.isEndChanges ? <ErrorMessage message='Email введен некоректно.' /> : null}
       
       <label htmlFor='phoneNumber'>Номер телефона:</label>
       <input type='text' id='phoneNumber' value={phoneNumber.value} onChange={phoneNumber.onChange} />
-      {phoneNumber.isPhoneNumberError && phoneNumber.isEndChanges ? <div>Номер введен некоректно</div> : null}
+      {phoneNumber.isPhoneNumberError && phoneNumber.isEndChanges ? <ErrorMessage message='Номер введен некоректно.' /> : null}
       
       <label htmlFor='birthday'>День рождения</label>
       <input type='date' id='birthday' onChange={birthday.onChange} value={birthday.value} />
-      {birthday.isEmptyError ? <div>Выберите дату рождения.</div> : null}
+      {birthday.isEmptyError ? <ErrorMessage message='Выберите дату рождения.' /> : null}
       
       <label htmlFor='message'>Сообщение:</label>
       <textarea id='message' placeholder='Введите сообщение' value={message.value} onChange={message.onChange} />
-      {message.maxLengthError && message.isEndChanges ? <div>Максимальная длинна сообщения 300 символов</div> : null}
-      {message.minLengthError && message.isEndChanges ? <div>Минимальная длинна сообщения 10 символов</div> : null}
-      {message.isEmptyError && message.isEndChanges ? <div>Оставьте сообщение</div> : null}
+      {message.maxLengthError && message.isEndChanges ? <ErrorMessage message='Максимальная длинна сообщения 300 символов.' /> : null}
+      {message.minLengthError && message.isEndChanges ? <ErrorMessage message='Минимальная длинна сообщения 10 символов.' /> : null}
+      {message.isEmptyError && message.isEndChanges ? <ErrorMessage message='Оставьте сообщение.' /> : null}
       <button type='submit' disabled={isButton}>Отправить</button>
       {reqStatus === 'success' ? <div>Форма отправлена успешно</div> : reqStatus === 'error' ?  <div>Ошибка в отправке формы</div> : null}
     </form>
